@@ -40,6 +40,7 @@ $users = new User($db);
     <h1>Панель администратора</h1>
     <table>
         <tr>
+            <th>ID</th>
             <th>Курс</th>
             <th>Пользователь</th>
             <th>Дата</th>
@@ -48,34 +49,72 @@ $users = new User($db);
         </tr>
 
         <td>
-            
+
         </td>
         <?php
-        array_walk($orders, function ($o) use ($courses, $payments, $statuses, $users) {
+
+        foreach ($orders as $o) {
             echo "
-                    <tr>
-                        <td>{$courses->findCourse($o['course_id'])['name']}</td>
-                        <td>{$users->findUser($o['user_id'])['FSM']}</td>
-                        <td>{$o['date']}</td>
-                        <td>{$payments->findPayment($o['payment_id'])['title']}</td>
-                        <td>
-                            <form method='post'>
-                                <select name='status'>
+                <tr>
+                    <td>{$o['id']}</td>
+                    <td>{$courses->findCourse($o['course_id'])['name']}</td>
+                    <td>{$users->findUser($o['user_id'])['FSM']}</td>
+                    <td>{$o['date']}</td>
+                    <td>{$payments->findPayment($o['payment_id'])['title']}</td>
+                    <td>
+                        <form method='post'>
+                            <select name='status' class='status' order='{$o['id']}'>
             ";
-            foreach ($statuses->fetchAllStatuses() as $s) {
+
+            if ($o['status_id'] == 1) {
                 echo "
-                    <option value='{$s['id']}' selected>{$s['name']}</option>
+                    <option value='{$o['status_id']}' selected hidden disabled>Новая</option>
+                ";
+            }
+
+            foreach ($statuses->fetchStatuses() as $s) {
+                echo "
+                    <option value='{$s['id']}'>{$s['name']}</option>
                 ";
             };
+
             echo "
                             </select>
                         </form>
                     </td>
                 </tr>
             ";
-        });
+        }
         ?>
     </table>
 </body>
 
 </html>
+
+<script>
+    async function post(request) {
+        try {
+            const response = await fetch(request);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    }
+
+    select = document.querySelectorAll('.status');
+    select.forEach(element => {
+        element.addEventListener('change', function(e) {
+            post(
+                new Request("src/Handler/ServiceHandler.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        order_id: e.target.getAttribute('order'),
+                        status_id: e.target.value,
+                    }),
+                }
+            ));
+        })
+    });
+</script>

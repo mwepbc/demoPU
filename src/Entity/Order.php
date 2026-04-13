@@ -49,4 +49,17 @@ class Order
             "payment_id" => $payment_id,
         ]);
     }
+
+    function changeStatus($order_id, $status_id): int{
+        $sth = $this->dbh->prepare("
+            UPDATE `orders` SET `status_id` = :status_id WHERE `orders`.`id` = :order_id
+        ");
+        
+        $sth->execute([
+            "status_id" => $status_id,
+            "order_id" => $order_id,
+        ]);
+
+        return $order_id;
+    }
 }

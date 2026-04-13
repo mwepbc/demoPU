@@ -11,16 +11,19 @@ require_once __DIR__ . '/src/Database.php';
 $user = new User(new Database());
 
 if ($_POST) {
-    $user = $user->auth(
+    $user_id = $user->auth(
         $_POST['login'],
         $_POST['password']
     );
 
-    if(!$user)
+    if(!$user_id)
         $error = 'Неверный логин или пароль';
     else{
-        setcookie('user', $user);
-        header("Location: orders.php");
+        setcookie('user', $user_id);
+        if($user->getRole($user_id) == 2)
+            header("Location: admin.php");
+        else
+            header("Location: orders.php");
     }
 }
 

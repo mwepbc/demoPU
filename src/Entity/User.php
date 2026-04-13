@@ -112,9 +112,9 @@ class User
     }
 
     public function getRole(int $id): int{
-        $sth = $this->dbh->prepare("SELECT role FROM `users` WHERE id = ?");
+        $sth = $this->dbh->prepare("SELECT role_id FROM `users` WHERE id = ?");
         $sth->execute([$id]);
-        return $sth->fetch();
+        return $sth->fetch()['role_id'];
     }
 
     public function findUser(int $id): ?array{
