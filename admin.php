@@ -18,8 +18,10 @@ require_once __DIR__ . '/src/Entity/User.php';
 
 $db = new Database();
 
+$sort = $_GET['sort'] ?? null;
+
 $orders = new Order($db);
-$orders = $orders->fetchAllOrders($_COOKIE['user']);
+$ordersList = $orders->fetchAllOrders($sort);
 
 $courses = new Course($db);
 $payments = new Payment($db);
@@ -34,67 +36,97 @@ $users = new User($db);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Панель администратора</title>
+    <link rel="stylesheet" href="resources/css/style.css">
 </head>
 
 <body>
     <h1>Панель администратора</h1>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Курс</th>
-            <th>Пользователь</th>
-            <th>Дата</th>
-            <th>Оплата</th>
-            <th>Статус</th>
-        </tr>
-
-        <td>
-
-        </td>
-        <?php
-
-        foreach ($orders as $o) {
-            echo "
+    <div class="message">
+    </div>
+    <div class="scroll">
+        <table>
+            <thead>
                 <tr>
-                    <td>{$o['id']}</td>
-                    <td>{$courses->findCourse($o['course_id'])['name']}</td>
-                    <td>{$users->findUser($o['user_id'])['FSM']}</td>
-                    <td>{$o['date']}</td>
-                    <td>{$payments->findPayment($o['payment_id'])['title']}</td>
-                    <td>
-                        <form method='post'>
-                            <select name='status' class='status' order='{$o['id']}'>
-            ";
-
-            if ($o['status_id'] == 1) {
-                echo "
-                    <option value='{$o['status_id']}' selected hidden disabled>Новая</option>
-                ";
-            }
-
-            foreach ($statuses->fetchStatuses() as $s) {
-                echo "
-                    <option value='{$s['id']}'>{$s['name']}</option>
-                ";
-            };
-
-            echo "
-                            </select>
-                        </form>
-                    </td>
+                    <th>ID
+                        <a href="admin.php?sort=id">↓</a>
+                    </th>
+                    <th>Курс
+                        <a href="admin.php?sort=course">↓</a>
+                    </th>
+                    <th>Пользователь
+                        <a href="admin.php?sort=user">↓</a>
+                    </th>
+                    <th>Дата
+                        <a href="admin.php?sort=date">↓</a>
+                    </th>
+                    <th>Оплата
+                        <a href="admin.php?sort=payment">↓</a>
+                    </th>
+                    <th>Статус
+                        <a href="admin.php?sort=status">↓</a>
+                    </th>
                 </tr>
-            ";
-        }
-        ?>
-    </table>
+            </thead>
+            <tbody>
+                <?php
+
+                foreach ($ordersList as $o) {
+                    echo "
+                    <tr>
+                        <td>{$o['id']}</td>
+                        <td>{$courses->findCourse($o['course_id'])['name']}</td>
+                        <td>{$users->findUser($o['user_id'])['FSM']}</td>
+                        <td>{$o['date']}</td>
+                        <td>{$payments->findPayment($o['payment_id'])['title']}</td>
+                        <td>
+                            <form method='post'>
+                                <select name='status' class='status' order='{$o['id']}'>
+                    ";
+
+                    if ($o['status_id'] == 1) {
+                        echo "
+                            <option value='{$o['status_id']}' selected hidden disabled>Новая</option>
+                        ";
+                    }
+
+                    foreach ($statuses->fetchStatuses() as $s) {
+                        if($s['id'] == $o['status_id']){
+                            echo "
+                                <option value='{$s['id']}' selected>{$s['name']}</option>
+                            ";
+                        }
+                        else{
+                            echo "
+                                <option value='{$s['id']}'>{$s['name']}</option>
+                            ";
+                        }
+                        
+                    };
+
+                    echo "
+                                    </select>
+                                </form>
+                            </td>
+                        </tr>
+                    ";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
 
 <script>
+    let message = document.querySelector('.message');
     async function post(request) {
         try {
             const response = await fetch(request);
+            const result = await response.json();
+            message.innerHTML = result.message;
+            message.style.display = 'flex';
+            console.log("Success:", result);
         } catch (error) {
             console.error("Error:", error);
         }
@@ -113,8 +145,7 @@ $users = new User($db);
                         order_id: e.target.getAttribute('order'),
                         status_id: e.target.value,
                     }),
-                }
-            ));
+                }));
         })
     });
 </script>

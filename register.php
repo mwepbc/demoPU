@@ -21,7 +21,7 @@ if ($_POST) {
         $_POST['email'],
     );
 
-    if(!$error)
+    if (!$error)
         header("Location: auth.php");
 }
 
@@ -33,9 +33,11 @@ if ($_POST) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация</title>
+    <link rel="stylesheet" href="resources/css/style.css">
 </head>
 
 <body>
+    <img src="resources/media/image01.webp" alt="logo" class="logo">
     <h1>Регистрация</h1>
     <form method="post">
         <div>
@@ -58,12 +60,9 @@ if ($_POST) {
             <label for="email">Адрес электронной почты</label>
             <input type="text" name="email" required>
         </div>
-        <p style="color: red"><?php echo $error; ?></p>
+        <p class="error"><?php echo $error; ?></p>
         <button type="submit">Создать пользователя</button>
-        <div>
-            <p>Уже зарегистрированы? </p>
-            <a href="auth.php">Вход</a>
-        </div>
+        <a href="auth.php">Уже зарегистрированы? Вход</a>
     </form>
 </body>
 

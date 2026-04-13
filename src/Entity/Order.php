@@ -15,10 +15,25 @@ class Order
         $this->dbh = $db->getDbh();
     }
 
-    function fetchAllOrders(): ?array {
+    function fetchAllOrders($sortColumn = null): ?array {
+        if($sortColumn){
+            $sth = match($sortColumn){
+                "id"=>$this->dbh->prepare("SELECT * FROM `orders`"),
+                "user" => $this->dbh->prepare("SELECT * FROM `orders` ORDER BY `user_id`"),
+                "course" => $this->dbh->prepare("SELECT * FROM `orders` ORDER BY `course_id`"),
+                "date" => $this->dbh->prepare("SELECT * FROM `orders` ORDER BY `date`"),
+                "payment" => $this->dbh->prepare("SELECT * FROM `orders` ORDER BY `payment_id`"),
+                "status" => $this->dbh->prepare("SELECT * FROM `orders` ORDER BY `status_id`"),
+            };
+            $sth->execute();
+            // var_dump($sth->fetchAll());
+            return $sth->fetchAll();
+        }
+
         $sth = $this->dbh->prepare("SELECT * FROM `orders`");
         $sth->execute([]);
         return $sth->fetchAll();
+    
     }
 
     function fetchUsersOrders($id): ?array
@@ -54,7 +69,7 @@ class Order
         $sth = $this->dbh->prepare("
             UPDATE `orders` SET `status_id` = :status_id WHERE `orders`.`id` = :order_id
         ");
-        
+
         $sth->execute([
             "status_id" => $status_id,
             "order_id" => $order_id,

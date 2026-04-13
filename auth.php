@@ -16,11 +16,11 @@ if ($_POST) {
         $_POST['password']
     );
 
-    if(!$user_id)
+    if (!$user_id)
         $error = 'Неверный логин или пароль';
-    else{
+    else {
         setcookie('user', $user_id);
-        if($user->getRole($user_id) == 2)
+        if ($user->getRole($user_id) == 2)
             header("Location: admin.php");
         else
             header("Location: orders.php");
@@ -35,9 +35,11 @@ if ($_POST) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Авторизация</title>
+    <link rel="stylesheet" href="resources/css/style.css">
 </head>
 
 <body>
+    <img src="resources/media/image01.webp" alt="logo" class="logo">
     <h1>Авторизация</h1>
     <form method="post">
         <div>
@@ -48,12 +50,9 @@ if ($_POST) {
             <label for="password">Пароль</label>
             <input type="password" name="password" required>
         </div>
-        <p style="color: red"><?php echo $error ?? ""; ?></p>
+        <p class="error"><?php echo $error ?? ""; ?></p>
         <button type="submit">Войти</button>
-        <div>
-            <p>Ещё не зарегистрированы? </p>
-            <a href="register.php">Регистрация</a>
-        </div>
+        <a href="register.php">Ещё не зарегистрированы? Регистрация</a>
     </form>
 </body>
 

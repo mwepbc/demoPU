@@ -29,6 +29,7 @@ if($_POST){
         $_COOKIE['user'],
         $_POST['payment'],
     );
+    header('Location: orders.php');
 }
 
 ?>
@@ -39,6 +40,7 @@ if($_POST){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Формирование заявки</title>
+    <link rel="stylesheet" href="resources/css/style.css">
 </head>
 
 <body>
