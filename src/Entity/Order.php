@@ -77,4 +77,15 @@ class Order
 
         return $order_id;
     }
+
+    function getAllUsersDoneOrders($user_id): array{
+        $sth = $this->dbh->prepare("
+        SELECT * FROM `orders` 
+        WHERE `user_id` = ?
+        AND `status_id` = 6");
+
+        $sth->execute([$user_id]);
+
+        return $sth->fetchAll();
+    }
 }

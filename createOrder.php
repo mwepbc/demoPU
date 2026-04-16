@@ -22,7 +22,7 @@ $payments = $payments->fetchAllPayments();
 
 $orders = new Order($db);
 
-if($_POST){
+if ($_POST) {
     $orders->insertOrder(
         $_POST['course'],
         $_POST['date'],
@@ -44,6 +44,7 @@ if($_POST){
 </head>
 
 <body>
+    <img src="resources/media/image01.webp" alt="logo" class="logo">
     <h1>Создать заявку</h1>
     <form method="POST">
         <div>

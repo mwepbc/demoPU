@@ -15,13 +15,16 @@ require_once __DIR__ . '/src/Entity/Payment.php';
 require_once __DIR__ . '/src/Entity/Status.php';
 
 $db = new Database();
+$user_id = $_COOKIE['user'];
 
 $orders = new Order($db);
-$orders = $orders->fetchUsersOrders($_COOKIE['user']);
+$ordersList = $orders->fetchUsersOrders($user_id);
 
 $courses = new Course($db);
 $payments = new Payment($db);
 $statuses = new Status($db);
+
+$doneOrders = $orders->getAllUsersDoneOrders($user_id) ?? null;
 
 ?>
 <!DOCTYPE html>
@@ -50,52 +53,69 @@ $statuses = new Status($db);
             </thead>
             <tbody>
                 <?php
-                if (empty($orders)) {
+                if (empty($ordersList)) {
                     echo "
-                <tr>
-                    <td colspan='4'>У вас пока нет ни одной заявки</td>
-                </tr>
-            ";
+                        <tr>
+                            <td colspan='4'>У вас пока нет ни одной заявки</td>
+                        </tr>
+                    ";
                 }
 
 
-                array_walk($orders, function ($o) use ($courses, $payments, $statuses) {
+                array_walk($ordersList, function ($o) use ($courses, $payments, $statuses) {
                     echo "
-                    <tr>
-                        <td>{$courses->findCourse($o['course_id'])['name']}</td>
-                        <td>{$o['date']}</td>
-                        <td>{$payments->findPayment($o['payment_id'])['title']}</td>
-                        <td>{$statuses->findStatus($o['status_id'])['name']}</td>
-                    </tr>
-            ";
-                    // ;
+                        <tr>
+                            <td>{$courses->findCourse($o['course_id'])['name']}</td>
+                            <td>{$o['date']}</td>
+                            <td>{$payments->findPayment($o['payment_id'])['title']}</td>
+                            <td>{$statuses->findStatus($o['status_id'])['name']}</td>
+                        </tr>
+                    ";
                 });
                 ?>
             </tbody>
         </table>
     </div>
+    <?php
+
+    ?>
     <form action="">
         <h2>
             Оставить отзыв о качестве образовательных услуг
         </h2>
-        <div>
-            <label for="feedback">Курс:</label>
-            <select name="courses">
-                <?php
-                foreach ($orders as $o) {
-                    if ($o['status_id'] == 6) {
-                        echo "<option value='{$o['course_id']}'>{$courses->findCourse($o['course_id'])['name']}</option>";
-                    }
+        <?php
+        if($doneOrders){
+            echo '
+            <div>
+                <label for="feedback">Курс:</label>
+                <select name="courses">
+            ';
+
+            foreach ($ordersList as $o) {
+                if ($o['status_id'] == 6) {
+                    echo "<option value='{$o['course_id']}'>{$courses->findCourse($o['course_id'])['name']}</option>";
                 }
-                ?>
-            </select>
-        </div>
-        <div>
-            <label for="feedback">Текст:</label>
-            <input type="text" name="feedback" required>
-        </div>
-        <button type="submit">Отправить</button>
+            }
+
+            echo '
+                </select>
+            </div>
+            <div>
+                <label for="feedback">Текст:</label>
+                <input type="text" name="feedback" required>
+            </div>
+            <button type="submit">Отправить</button>
+            ';
+        }
+        else{
+            echo 'Похоже, у вас ещё нет законченных курсов обучения';
+        }
+        
+        ?>
     </form>
 </body>
-
 </html>
+
+<script>
+
+</script>

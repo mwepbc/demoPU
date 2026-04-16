@@ -11,7 +11,8 @@ a{
 }
 
 button{
-    padding: 1vw;
+    padding: 1vh;
+    border: none;
 }
 
 .error{
@@ -19,12 +20,13 @@ button{
 }
 
 .logo{
-    width: 70%;
+    width: 20vh;
 }
 
 body{
     width: 100vw;
-    height: 100vh;
+    height: auto;
+    padding: 2vh 10vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -36,7 +38,6 @@ form{
     display: flex;
     flex-direction: column;
     gap: 2vh;
-    width: 80%;
 }
 
 form>div{
@@ -62,7 +63,7 @@ th{
 }
 
 .scroll{
-    width: 95%;
+    width: 100%;
     overflow-x: scroll;
 }
 
@@ -71,4 +72,32 @@ th{
     padding: 2vw;
     background-color: lightgreen;
     display: none;
+}
+
+.slider{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2vw;
+
+}
+
+.sliderInfo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sliderInfo>img{
+    height: 400px;
+    width: 500px;
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 600px) {
+    .sliderInfo>img{
+    height: 200px;
+    width: 300px;
+    border-radius: 5px;
+    }
 }

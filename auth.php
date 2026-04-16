@@ -54,6 +54,55 @@ if ($_POST) {
         <button type="submit">Войти</button>
         <a href="register.php">Ещё не зарегистрированы? Регистрация</a>
     </form>
+
+    <div class="slider">
+        <button onclick="prevSlider()">←</button>
+        <div class="sliderInfo">
+            <img src="resources/media/image08.webp" alt="sliderPhoto">
+        </div>
+        <button onclick="nextSlider()">→</button>
+    </div>
 </body>
 
 </html>
+
+<script>
+    let slider = document.querySelector(".sliderInfo");
+    let photos = [
+        'image08.webp',
+        'image09.webp',
+        'image10.webp',
+        'image12.webp'
+    ];
+    let cunt = photos.length;
+    let index = 0;
+
+    function prevSlider() {
+        index = (index - 1 + cunt) % cunt;
+        console.log(cunt);
+        updateSlider();
+    }
+
+    function nextSlider() {
+        index = (index + 1) % cunt;
+        updateSlider();
+    }
+
+    function updateSlider() {
+        slider.innerHTML = `
+            <img src="resources/media/${photos[index]}" alt="sliderPhoto">
+        `;
+        resetTimer();
+    }
+
+    function startTimer() {
+        timer = setInterval(nextSlider, 3000);
+    }
+
+    function resetTimer(){
+        clearInterval(timer);
+        startTimer();
+    }
+
+    startTimer();
+</script>
