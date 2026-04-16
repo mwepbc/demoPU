@@ -66,6 +66,10 @@ form>div{
     gap: 1vh;
 }
 
+.selectForm{
+    width: 100%;
+}
+
 table{
     width: 100%;
     border-collapse: collapse;

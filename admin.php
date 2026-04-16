@@ -44,9 +44,11 @@ $statuses = new Status($db);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Панель администратора</title>
     <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="shortcut icon" href="resources/media/image01.webp" type="image/x-icon">
 </head>
 
 <body>
+    <img src="resources/media/image01.webp" alt="logo" class="logo">
     <h1>Панель администратора</h1>
     <a href="auth.php">Выход</a>
     <div class="message">
@@ -87,7 +89,7 @@ $statuses = new Status($db);
                         <td>{$o['date']}</td>
                         <td>{$payments->findPayment($o['payment_id'])['title']}</td>
                         <td>
-                            <form method='post'>
+                            <form method='post' class='selectForm'>
                                 <select name='status' class='status' order='{$o['id']}'>
                     ";
 

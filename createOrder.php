@@ -41,6 +41,7 @@ if ($_POST) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Формирование заявки</title>
     <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="shortcut icon" href="resources/media/image01.webp" type="image/x-icon">
 </head>
 
 <body>

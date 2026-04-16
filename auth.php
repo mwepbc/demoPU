@@ -36,6 +36,7 @@ if ($_POST) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Авторизация</title>
     <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="shortcut icon" href="resources/media/image01.webp" type="image/x-icon">
 </head>
 
 <body>
@@ -62,7 +63,7 @@ if ($_POST) {
         </div>
         <button onclick="nextSlider()">→</button>
     </div>
-<script src="resources/js/slider.js"></script>
+    <script src="resources/js/slider.js"></script>
 </body>
 
 </html>
