@@ -40,6 +40,7 @@ if ($_POST) {
     <img src="resources/media/image01.webp" alt="logo" class="logo">
     <h1>Регистрация</h1>
     <form method="post">
+        <span class="error"><?php echo $error ?? ""; ?></span>
         <div>
             <label for="login">Логин</label>
             <input type="text" name="login" required>
@@ -60,7 +61,6 @@ if ($_POST) {
             <label for="email">Адрес электронной почты</label>
             <input type="text" name="email" required>
         </div>
-        <p class="error"><?php echo $error; ?></p>
         <button type="submit">Создать пользователя</button>
         <a href="auth.php">Уже зарегистрированы? Вход</a>
     </form>

@@ -23,10 +23,17 @@ $sort = $_GET['sort'] ?? null;
 $orders = new Order($db);
 $ordersList = $orders->fetchAllOrders($sort);
 
+$users = new User($db);
+
+$user = $_COOKIE['user'];
+if (!$user)
+    header("Location: auth.php");
+if ($users->getRole($user) != 2)
+    header("Location: orders.php");
+
 $courses = new Course($db);
 $payments = new Payment($db);
 $statuses = new Status($db);
-$users = new User($db);
 
 ?>
 <!DOCTYPE html>
@@ -41,6 +48,7 @@ $users = new User($db);
 
 <body>
     <h1>Панель администратора</h1>
+    <a href="auth.php">Выход</a>
     <div class="message">
     </div>
     <div class="scroll">
@@ -90,17 +98,15 @@ $users = new User($db);
                     }
 
                     foreach ($statuses->fetchStatuses() as $s) {
-                        if($s['id'] == $o['status_id']){
+                        if ($s['id'] == $o['status_id']) {
                             echo "
                                 <option value='{$s['id']}' selected>{$s['name']}</option>
                             ";
-                        }
-                        else{
+                        } else {
                             echo "
                                 <option value='{$s['id']}'>{$s['name']}</option>
                             ";
                         }
-                        
                     };
 
                     echo "
@@ -114,8 +120,7 @@ $users = new User($db);
             </tbody>
         </table>
     </div>
+    <script src="resources/js/admin.js"></script>
 </body>
 
 </html>
-
-<script src="resources/js/admin.js"></script>

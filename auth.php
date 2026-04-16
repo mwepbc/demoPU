@@ -9,6 +9,7 @@ require_once __DIR__ . '/src/Entity/User.php';
 require_once __DIR__ . '/src/Database.php';
 
 $user = new User(new Database());
+setcookie('user', '', -3600);
 
 if ($_POST) {
     $user_id = $user->auth(
@@ -26,7 +27,6 @@ if ($_POST) {
             header("Location: orders.php");
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,15 +42,15 @@ if ($_POST) {
     <img src="resources/media/image01.webp" alt="logo" class="logo">
     <h1>Авторизация</h1>
     <form method="post">
+        <span class="error"><?php echo $error ?? ""; ?></span>
         <div>
             <label for="login">Логин</label>
-            <input type="text" name="login" required>
+            <input type="text" name="login" id="login" required>
         </div>
         <div>
             <label for="password">Пароль</label>
-            <input type="password" name="password" required>
+            <input type="password" name="password" id="password" required>
         </div>
-        <p class="error"><?php echo $error ?? ""; ?></p>
         <button type="submit">Войти</button>
         <a href="register.php">Ещё не зарегистрированы? Регистрация</a>
     </form>
@@ -62,47 +62,7 @@ if ($_POST) {
         </div>
         <button onclick="nextSlider()">→</button>
     </div>
+<script src="resources/js/slider.js"></script>
 </body>
 
 </html>
-
-<script>
-    let slider = document.querySelector(".sliderInfo");
-    let photos = [
-        'image08.webp',
-        'image09.webp',
-        'image10.webp',
-        'image12.webp'
-    ];
-    let cunt = photos.length;
-    let index = 0;
-
-    function prevSlider() {
-        index = (index - 1 + cunt) % cunt;
-        console.log(cunt);
-        updateSlider();
-    }
-
-    function nextSlider() {
-        index = (index + 1) % cunt;
-        updateSlider();
-    }
-
-    function updateSlider() {
-        slider.innerHTML = `
-            <img src="resources/media/${photos[index]}" alt="sliderPhoto">
-        `;
-        resetTimer();
-    }
-
-    function startTimer() {
-        timer = setInterval(nextSlider, 3000);
-    }
-
-    function resetTimer(){
-        clearInterval(timer);
-        startTimer();
-    }
-
-    startTimer();
-</script>

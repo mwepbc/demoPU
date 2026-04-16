@@ -41,6 +41,7 @@ $doneOrders = $orders->getAllUsersDoneOrders($user_id) ?? null;
     <img src="resources/media/image01.webp" alt="logo" class="logo">
     <h1>Заявки</h1>
     <a href="createOrder.php">Создать заявку</a>
+    <a href="auth.php">Выход</a>
     <div class="scroll">
         <table>
             <thead>
@@ -84,7 +85,7 @@ $doneOrders = $orders->getAllUsersDoneOrders($user_id) ?? null;
             Оставить отзыв о качестве образовательных услуг
         </h2>
         <?php
-        if($doneOrders){
+        if ($doneOrders) {
             echo '
             <div>
                 <label for="feedback">Курс:</label>
@@ -106,14 +107,14 @@ $doneOrders = $orders->getAllUsersDoneOrders($user_id) ?? null;
             </div>
             <button type="submit">Отправить</button>
             ';
-        }
-        else{
+        } else {
             echo 'Похоже, у вас ещё нет законченных курсов обучения';
         }
-        
+
         ?>
     </form>
 </body>
+
 </html>
 
 <script>

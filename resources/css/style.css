@@ -1,3 +1,13 @@
+@keyframes slide-in {
+  from {
+    translate: -5px;
+  }
+
+  to {
+    translate: 5px;
+  }
+}
+
 *{
     box-sizing: border-box;
     margin: 0;
@@ -7,7 +17,7 @@
 
 a{
     text-decoration: none;
-    color: orangered;
+    color: rgb(255, 117, 66);
 }
 
 button{
@@ -17,10 +27,19 @@ button{
 
 .error{
     color: red;
+    width: 100%;
+    font-size: bold;
 }
 
 .logo{
     width: 20vh;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 body{
@@ -38,6 +57,7 @@ form{
     display: flex;
     flex-direction: column;
     gap: 2vh;
+    width: 50%;
 }
 
 form>div{
@@ -68,7 +88,7 @@ th{
 }
 
 .message{
-    width: 95%;
+    width: 100%;
     padding: 2vw;
     background-color: lightgreen;
     display: none;
@@ -80,6 +100,10 @@ th{
     justify-content: space-between;
     gap: 2vw;
 
+}
+
+.slider button:hover{
+    animation: 1s infinite alternate slide-in;
 }
 
 .sliderInfo{
@@ -97,7 +121,11 @@ th{
 @media screen and (max-width: 600px) {
     .sliderInfo>img{
     height: 200px;
-    width: 300px;
+    width: 250px;
     border-radius: 5px;
+    }
+    
+    form{
+        width: 100%;
     }
 }
