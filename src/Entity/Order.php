@@ -15,7 +15,7 @@ class Order
         $this->dbh = $db->getDbh();
     }
 
-    function fetchAllOrders($sortColumn = null): ?array {
+    function fetchAllOrders(?string $sortColumn): ?array {
         if($sortColumn){
             $sth = match($sortColumn){
                 "id"=>$this->dbh->prepare("SELECT * FROM `orders`"),
@@ -36,7 +36,7 @@ class Order
     
     }
 
-    function fetchUsersOrders($id): ?array
+    function fetchUsersOrders(int $id): ?array
     {
         $sth = $this->dbh->prepare("
             SELECT * FROM `orders`
@@ -60,12 +60,12 @@ class Order
         $sth->execute([
             "course_id"=>$course_id,
             "date"=>$date,
-            "user_id"=> $user_id,
+            "user_id"=> $user_id ?? 1,
             "payment_id" => $payment_id,
         ]);
     }
 
-    function changeStatus($order_id, $status_id): int{
+    function changeStatus(int $order_id, int $status_id): int{
         $sth = $this->dbh->prepare("
             UPDATE `orders` SET `status_id` = :status_id WHERE `orders`.`id` = :order_id
         ");
@@ -78,13 +78,13 @@ class Order
         return $order_id;
     }
 
-    function getAllUsersDoneOrders($user_id): array{
+    function getAllUsersDoneOrders(int $user_id): array{
         $sth = $this->dbh->prepare("
         SELECT * FROM `orders` 
         WHERE `user_id` = ?
         AND `status_id` = 6");
 
-        $sth->execute([$user_id]);
+        $sth->execute([$user_id ?? 1]);
 
         return $sth->fetchAll();
     }

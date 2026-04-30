@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корочки.Есть — Заявки</title>
+    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="shortcut icon" href="resources/media/image01.webp" type="image/x-icon">
+</head>
+
+<body>
+    <img src="resources/media/image01.webp" alt="logo" class="logo">
+    <h1>Заявки</h1>
+    <a href="createOrder.html">Создать заявку</a>
+    <a href="auth.html">Выход</a>
+    <div class="scroll">
+        <table>
+            <thead>
+                <tr>
+                    <th>Курс</th>
+                    <th>Дата</th>
+                    <th>Оплата</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Основы веб-дизайна</td>
+                    <td>25.25.2025</td>
+                    <td>Наличными</td>
+                    <td>Обучение завершено</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <form action="#">
+        <h2>
+            Оставить отзыв о качестве образовательных услуг
+        </h2>
+        <div>
+            <label for="feedback">Курс:</label>
+            <select name="courses" id="courses">
+                <option value='2'>Основы веб-дизайна</option>
+            </select>
+        </div>
+        <div>
+            <label for="feedback">Текст:</label>
+            <input type="text" name="feedback" id="feedback" required>
+        </div>
+        <button type="submit">Отправить</button>
+    </form>
+</body>
+
+</html>

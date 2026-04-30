@@ -19,6 +19,9 @@ a{
     text-decoration: none;
     color: rgb(255, 117, 66);
 }
+h1{
+    text-align: center;
+}
 
 button{
     padding: 1vh;

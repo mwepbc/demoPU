@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корочки.Есть — Панель администратора</title>
+    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="shortcut icon" href="resources/media/image01.webp" type="image/x-icon">
+</head>
+
+<body>
+    <img src="resources/media/image01.webp" alt="logo" class="logo">
+    <h1>Корочки.Есть — Панель администратора — Заявки</h1>
+    <a href="auth.html">Выход</a>
+    <div class="message" style="display: flex;">
+        Статус заявки 1 изменен на Идет обучение
+    </div>
+    <div class="scroll">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID
+                        <a href="admin.php?sort=id">↓</a>
+                    </th>
+                    <th>Курс
+                        <a href="admin.php?sort=course">↓</a>
+                    </th>
+                    <th>Пользователь
+                        <a href="admin.php?sort=user">↓</a>
+                    </th>
+                    <th>Дата
+                        <a href="admin.php?sort=date">↓</a>
+                    </th>
+                    <th>Оплата
+                        <a href="admin.php?sort=payment">↓</a>
+                    </th>
+                    <th>Статус
+                        <a href="admin.php?sort=status">↓</a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Основы веб-дизайна</td>
+                    <td>Василий Пупкин Федорович</td>
+                    <td>25.25.2025</td>
+                    <td>Наличными</td>
+                    <td>
+                        <form method='post' class='selectForm'>
+                            <select name='status' class='status'>
+                                <option value='1' >Новая</option>
+                                <option value='2' selected>Идет обучение</option>
+                                <option value='6' >Обучение завершено</option>
+                            </select>
+                            <button type="submit">Сохранить</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Основы проектирования баз данных</td>
+                    <td>Федор Василин Пупкович</td>
+                    <td>25.25.2025</td>
+                    <td>Перевод по номеру телефона</td>
+                    <td>
+                        <form method='post' class='selectForm'>
+                            <select name='status' class='status'>
+                                <option value='1' selected>Новая</option>
+                                <option value='2'>Идет обучение</option>
+                                <option value='6' >Обучение завершено</option>
+                            </select>
+                            <button type="submit">Сохранить</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

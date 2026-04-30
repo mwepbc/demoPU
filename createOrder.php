@@ -39,14 +39,14 @@ if ($_POST) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Формирование заявки</title>
+    <title>Корочки.Есть — Формирование заявки</title>
     <link rel="stylesheet" href="resources/css/style.css">
     <link rel="shortcut icon" href="resources/media/image01.webp" type="image/x-icon">
 </head>
 
 <body>
     <img src="resources/media/image01.webp" alt="logo" class="logo">
-    <h1>Создать заявку</h1>
+    <h1>Корочки.Есть — Создать заявку</h1>
     <form method="POST">
         <div>
             <label for="course">Наименование курса:</label>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корочки.Есть — Формирование заявки</title>
+    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="shortcut icon" href="resources/media/image01.webp" type="image/x-icon">
+</head>
+
+<body>
+    <img src="resources/media/image01.webp" alt="logo" class="logo">
+    <h1>Корочки.Есть — Создать заявку</h1>
+    <form method="POST">
+        <div>
+            <label for="course">Наименование курса:</label>
+            <select name="course" id="course">
+                <option value='1'>Основы алгоритмизации и программирования</option>
+                <option value='2'>Основы веб-дизайна</option>
+                <option value='3'>Основы проектирования баз данных</option>
+            </select>
+        </div>
+        <div>
+            <label for="date">Дата начала обучения:</label>
+            <input type="date" name="date" id="date" required>
+        </div>
+        <div>
+            <label for="payment">Способ оплаты:</label>
+            <select name="payment" id="payment">
+                <option value='1'>Наличными</option>
+                <option value='2'>Перевод по номеру телефона</option>
+            </select>
+        </div>
+        <button type="submit">Отправить</button>
+    </form>
+</body>
+
+</html>

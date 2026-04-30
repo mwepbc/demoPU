@@ -25,11 +25,7 @@ $ordersList = $orders->fetchAllOrders($sort);
 
 $users = new User($db);
 
-$user = $_COOKIE['user'];
-if (!$user)
-    header("Location: auth.php");
-if ($users->getRole($user) != 2)
-    header("Location: orders.php");
+
 
 $courses = new Course($db);
 $payments = new Payment($db);
@@ -42,14 +38,14 @@ $statuses = new Status($db);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Панель администратора</title>
+    <title>Корочки.Есть — Панель администратора</title>
     <link rel="stylesheet" href="resources/css/style.css">
     <link rel="shortcut icon" href="resources/media/image01.webp" type="image/x-icon">
 </head>
 
 <body>
     <img src="resources/media/image01.webp" alt="logo" class="logo">
-    <h1>Панель администратора</h1>
+    <h1>Корочки.Есть — Панель администратора</h1>
     <a href="auth.php">Выход</a>
     <div class="message">
     </div>

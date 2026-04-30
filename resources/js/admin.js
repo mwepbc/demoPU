@@ -1,4 +1,5 @@
 let message = document.querySelector('.message');
+
 async function post(request) {
     try {
         const response = await fetch(request);
