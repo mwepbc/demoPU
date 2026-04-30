@@ -22,14 +22,18 @@ $sort = $_GET['sort'] ?? null;
 
 $orders = new Order($db);
 $ordersList = $orders->fetchAllOrders($sort);
+$message = null;
 
 $users = new User($db);
-
-
 
 $courses = new Course($db);
 $payments = new Payment($db);
 $statuses = new Status($db);
+
+if ($_POST) {
+    $currentOrder = $orders->changeStatus($_POST['order'], $_POST['status']);
+    $message = "Статус заявки {$currentOrder} изменен на {$statuses->findStatus($_POST['status'])['name']}";
+}
 
 ?>
 <!DOCTYPE html>
@@ -47,8 +51,16 @@ $statuses = new Status($db);
     <img src="resources/media/image01.webp" alt="logo" class="logo">
     <h1>Корочки.Есть — Панель администратора</h1>
     <a href="auth.php">Выход</a>
-    <div class="message">
-    </div>
+    <?php 
+        if($message){
+            echo "
+                <div class='message'>
+                    {$message}
+                </div>
+            ";
+        }
+    ?>
+    
     <div class="scroll">
         <table>
             <thead>
@@ -78,37 +90,32 @@ $statuses = new Status($db);
 
                 foreach ($ordersList as $o) {
                     echo "
-                    <tr>
-                        <td>{$o['id']}</td>
-                        <td>{$courses->findCourse($o['course_id'])['name']}</td>
-                        <td>{$users->findUser($o['user_id'])['FSM']}</td>
-                        <td>{$o['date']}</td>
-                        <td>{$payments->findPayment($o['payment_id'])['title']}</td>
-                        <td>
-                            <form method='post' class='selectForm'>
-                                <select name='status' class='status' order='{$o['id']}'>
-                    ";
-
-                    if ($o['status_id'] == 1) {
-                        echo "
-                            <option value='{$o['status_id']}' selected hidden disabled>Новая</option>
-                        ";
-                    }
-
-                    foreach ($statuses->fetchStatuses() as $s) {
-                        if ($s['id'] == $o['status_id']) {
+                        <tr>
+                            <td>{$o['id']}</td>
+                            <td>{$courses->findCourse($o['course_id'])['name']}</td>
+                            <td>{$users->findUser($o['user_id'])['FSM']}</td>
+                            <td>{$o['date']}</td>
+                            <td>{$payments->findPayment($o['payment_id'])['title']}</td>
+                            <td>
+                                <form method='post' class='selectForm'>
+                                    <select name='status' class='status'>";
+                    
+                    foreach ($statuses->fetchStatuses() as $status) {
+                        if($status['id'] == $o['status_id']){
                             echo "
-                                <option value='{$s['id']}' selected>{$s['name']}</option>
-                            ";
-                        } else {
-                            echo "
-                                <option value='{$s['id']}'>{$s['name']}</option>
+                                <option value='{$status["id"]}' selected >{$status["name"]}</option>
                             ";
                         }
-                    };
-
-                    echo "
+                        else{
+                            echo "
+                                <option value='{$status["id"]}' >{$status["name"]}</option>
+                            ";
+                        }
+                    }
+                    echo "                    
                                     </select>
+                                    <input type='hidden' name='order' value='{$o['id']}'>
+                                    <button type='submit'>Сохранить</button>
                                 </form>
                             </td>
                         </tr>
@@ -118,7 +125,6 @@ $statuses = new Status($db);
             </tbody>
         </table>
     </div>
-    <script src="resources/js/admin.js"></script>
 </body>
 
 </html>

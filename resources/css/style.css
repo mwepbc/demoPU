@@ -46,7 +46,6 @@ button{
 }
 
 body{
-    width: 100vw;
     height: auto;
     padding: 2vh 10vw;
     display: flex;
@@ -98,7 +97,7 @@ th{
     width: 100%;
     padding: 2vw;
     background-color: lightgreen;
-    display: none;
+    display: flex;
 }
 
 .slider{

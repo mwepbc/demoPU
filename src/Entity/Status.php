@@ -17,7 +17,7 @@ class Status
 
     function fetchStatuses(): ?array
     {
-        $sth = $this->dbh->prepare("SELECT * FROM `statuses` WHERE NOT `name` = 'Новая'");
+        $sth = $this->dbh->prepare("SELECT * FROM `statuses`");
         $sth->execute([]);
         return $sth->fetchAll();
     }
