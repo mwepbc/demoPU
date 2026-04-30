@@ -4,7 +4,7 @@ namespace App;
 use PDO;
 
 class Database{
-    private $dbh;
+    private PDO $dbh;
 
     public function __construct() {
         $dsn = "mysql:dbname=demopa;host=localhost";

@@ -124,6 +124,11 @@ th{
     border-radius: 5px;
 }
 
+.indexInfo{
+    display: flex;
+    gap: 1vw;
+}
+
 @media screen and (max-width: 600px) {
     .sliderInfo>img{
     height: 200px;
@@ -133,5 +138,9 @@ th{
     
     form{
         width: 100%;
+    }
+
+    .indexInfo{
+        flex-direction: column;
     }
 }

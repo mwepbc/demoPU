@@ -62,7 +62,7 @@ if ($_POST) {
             <label for="email">Адрес электронной почты</label>
             <input type="text" name="email" required>
         </div>
-        <button type="submit">Создать пользователя</button>
+        <button type="submit">Зарегистрироваться</button>
         <a href="auth.php">Уже зарегистрированы? Вход</a>
     </form>
 </body>
