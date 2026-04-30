@@ -19,6 +19,7 @@ a{
     text-decoration: none;
     color: rgb(255, 117, 66);
 }
+
 h1{
     text-align: center;
 }
@@ -26,6 +27,26 @@ h1{
 button{
     padding: 1vh;
     border: none;
+}
+
+ul{
+    list-style: none;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2vw;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+
+header a{
+    color: inherit;
 }
 
 .error{
@@ -141,6 +162,10 @@ th{
     }
 
     .indexInfo{
+        flex-direction: column;
+    }
+
+    header, ul{
         flex-direction: column;
     }
 }

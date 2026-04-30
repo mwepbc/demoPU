@@ -15,7 +15,7 @@ require_once __DIR__ . '/src/Entity/Payment.php';
 require_once __DIR__ . '/src/Entity/Status.php';
 
 $db = new Database();
-$user_id = $_COOKIE['user'];
+$user_id = $_COOKIE['user'] ?? null;
 
 $orders = new Order($db);
 $ordersList = $orders->fetchUsersOrders($user_id);
@@ -39,10 +39,8 @@ $doneOrders = $orders->getAllUsersDoneOrders($user_id) ?? null;
 </head>
 
 <body>
-    <img src="resources/media/image01.webp" alt="logo" class="logo">
+    <?php require_once __DIR__ . '/src/Include/header.php'; ?>
     <h1>Заявки</h1>
-    <a href="createOrder.php">Создать заявку</a>
-    <a href="auth.php">Выход</a>
     <div class="scroll">
         <table>
             <thead>

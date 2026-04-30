@@ -48,19 +48,18 @@ if ($_POST) {
 </head>
 
 <body>
-    <img src="resources/media/image01.webp" alt="logo" class="logo">
+    <?php require_once __DIR__ . '/src/Include/header.php'; ?>
     <h1>Корочки.Есть — Панель администратора</h1>
-    <a href="auth.php">Выход</a>
-    <?php 
-        if($message){
-            echo "
+    <?php
+    if ($message) {
+        echo "
                 <div class='message'>
                     {$message}
                 </div>
             ";
-        }
+    }
     ?>
-    
+
     <div class="scroll">
         <table>
             <thead>
@@ -99,14 +98,13 @@ if ($_POST) {
                             <td>
                                 <form method='post' class='selectForm'>
                                     <select name='status' class='status'>";
-                    
+
                     foreach ($statuses->fetchStatuses() as $status) {
-                        if($status['id'] == $o['status_id']){
+                        if ($status['id'] == $o['status_id']) {
                             echo "
                                 <option value='{$status["id"]}' selected >{$status["name"]}</option>
                             ";
-                        }
-                        else{
+                        } else {
                             echo "
                                 <option value='{$status["id"]}' >{$status["name"]}</option>
                             ";

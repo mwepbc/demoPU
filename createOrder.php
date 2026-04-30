@@ -45,7 +45,7 @@ if ($_POST) {
 </head>
 
 <body>
-    <img src="resources/media/image01.webp" alt="logo" class="logo">
+    <?php require_once __DIR__ . '/src/Include/header.php'; ?>
     <h1>Корочки.Есть — Создать заявку</h1>
     <form method="POST">
         <div>

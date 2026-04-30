@@ -36,20 +36,20 @@ class Order
     
     }
 
-    function fetchUsersOrders(int $id): ?array
+    function fetchUsersOrders(?int $id): ?array
     {
         $sth = $this->dbh->prepare("
             SELECT * FROM `orders`
             WHERE user_id = ?;
         ");
-        $sth->execute([$id]);
+        $sth->execute([$id ?? 1]);
         return $sth->fetchAll();
     }
 
     function insertOrder(
         int $course_id,
         string $date,
-        int $user_id,
+        ?int $user_id,
         int $payment_id,
     ): void{
         $sth = $this->dbh->prepare("
@@ -78,7 +78,7 @@ class Order
         return $order_id;
     }
 
-    function getAllUsersDoneOrders(int $user_id): array{
+    function getAllUsersDoneOrders(?int $user_id): array{
         $sth = $this->dbh->prepare("
         SELECT * FROM `orders` 
         WHERE `user_id` = ?

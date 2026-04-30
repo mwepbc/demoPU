@@ -9,7 +9,6 @@ require_once __DIR__ . '/src/Entity/User.php';
 require_once __DIR__ . '/src/Database.php';
 
 $user = new User(new Database());
-setcookie('user', '', -3600);
 
 if ($_POST) {
     $user_id = $user->auth(
@@ -40,7 +39,7 @@ if ($_POST) {
 </head>
 
 <body>
-    <img src="resources/media/image01.webp" alt="logo" class="logo">
+    <?php require_once __DIR__ . '/src/Include/header.php'; ?>
     <h1>Корочки.Есть — Авторизация</h1>
     <form method="post">
         <span class="error"><?php echo $error ?? ""; ?></span>

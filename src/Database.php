@@ -1,12 +1,20 @@
 <?php
+
 namespace App;
 
 use PDO;
 
-class Database{
+class Database
+{
     private PDO $dbh;
 
-    public function __construct() {
+    public function __construct()
+    {
+        // для хоста
+        // $dsn = "mysql:dbname=f1257984_db;host=localhost";
+        // $user = "f1257984_db";
+        // $password = "f1257984_db";
+
         $dsn = "mysql:dbname=demopa;host=localhost";
         $user = "root";
         $password = "";
@@ -14,7 +22,8 @@ class Database{
         $this->dbh = new PDO($dsn, $user, $password);
     }
 
-    public function getDbh(): PDO{
+    public function getDbh(): PDO
+    {
         return $this->dbh;
     }
 }

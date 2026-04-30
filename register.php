@@ -32,13 +32,13 @@ if ($_POST) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация</title>
+    <title>Корочки.Есть — Регистрация</title>
     <link rel="stylesheet" href="resources/css/style.css">
     <link rel="shortcut icon" href="resources/media/image01.webp" type="image/x-icon">
 </head>
 
 <body>
-    <img src="resources/media/image01.webp" alt="logo" class="logo">
+    <?php require_once __DIR__ . '/src/Include/header.php'; ?>
     <h1>Корочки.Есть — Регистрация</h1>
     <form method="post">
         <span class="error"><?php echo $error ?? ""; ?></span>
